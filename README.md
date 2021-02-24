@@ -3,10 +3,10 @@
 
 #### Table of Contents
 
-[About](#about)
-[Getting Started](#getting-started)
-[Troubleshooting](#troubleshooting)
-[License](#license)
+1. [About](#about)
+2. [Getting Started](#getting-started)
+3. [Troubleshooting](#troubleshooting)
+4. [License](#license)
 
 ## About
 
@@ -16,29 +16,29 @@ This is a compilation of scripts and references to allow you, a database adminis
 
 First, we will need to create the sp_BackupDatabases stored procedure
 
-*This is in reference to Step A of https://docs.microsoft.com/en-us/troubleshoot/sql/admin/schedule-automate-backup-database
+* This is in reference to Step A of https://docs.microsoft.com/en-us/troubleshoot/sql/admin/schedule-automate-backup-database
 	
-*The actual script is linked at https://raw.githubusercontent.com/microsoft/mssql-support/master/sample-scripts/backup_restore/SQL_Express_Backups.sql
+* The actual script is linked at https://raw.githubusercontent.com/microsoft/mssql-support/master/sample-scripts/backup_restore/SQL_Express_Backups.sql
 	
-*To facilitate simplicity, you may also find sp_BackupDatabases_creation_script.sql in this Kit based off of the script described in b., current as of 1/11/2021
+* To facilitate simplicity, you may also find sp_BackupDatabases_creation_script.sql in this Kit based off of the script described in b., current as of 1/11/2021
   *Always review scripts and code as it relates to your version of software, OS, and environment!
 	
-*If copy/pasting, in SSMS create New Query, copy/paste script into query, execute
+* If copy/pasting, in SSMS create New Query, copy/paste script into query, execute
 	
-*If you wish to use the provided .sql script, open it in SQL Server Management Studio and execute
+* If you wish to use the provided .sql script, open it in SQL Server Management Studio and execute
   *Always review scripts and code as it relates to your version of software, OS, and environment!
 
 Once that is done we will need to create a batch file (.bat) that uses the sqlcmd Utility for creating a full backup of each database using Windows Authentication
 	
-*Described in Example 1 of Step C of https://docs.microsoft.com/en-us/troubleshoot/sql/admin/schedule-automate-backup-database
+* Described in Example 1 of Step C of https://docs.microsoft.com/en-us/troubleshoot/sql/admin/schedule-automate-backup-database
 	
-*SQLScheduledBackup.bat is the recommended title
+* SQLScheduledBackup.bat is the recommended title
 	
-*It is recommended to create a sub-directory of C:\ (or, ideally, D:\ or just some other non-C:\ drive) and naming it SQLBackups, e.g. C:\SQLBackups
-  *If you forget this part, it is okay; the script has a fail-safe that includes an IF statement to ensure this directory exists, you just need to edit the directory path if you choose something other than C:\SQLBackups
-  *Side note: BE ABSOLUTELY CERTAIN you have properly named each directory path and SQL server name used!
+* It is recommended to create a sub-directory of C:\ (or, ideally, D:\ or just some other non-C:\ drive) and naming it SQLBackups, e.g. C:\SQLBackups
+  * If you forget this part, it is okay; the script has a fail-safe that includes an IF statement to ensure this directory exists, you just need to edit the directory path if you choose something other than C:\SQLBackups
+  * Side note: BE ABSOLUTELY CERTAIN you have properly named each directory path and SQL server name used!
 	
-*Copy/paste the below into a .txt file, save as SQLScheduledBackup.bat to your Desktop (or preferred directory), and edit all of the items as referenced by the comments (which start with double-colons `::` in the code):
+* Copy/paste the below into a .txt file, save as SQLScheduledBackup.bat to your Desktop (or preferred directory), and edit all of the items as referenced by the comments (which start with double-colons `::` in the code):
 
 `
 :: NOTE! Ensure the path for IF NOT EXIST is what you want!
@@ -56,23 +56,23 @@ After we have the .bat file it is recommended that we test it. Pending success, 
 
 ## Troubleshooting
 
-*No sqlcmd Utility? You're likely running SQL Server 2016 or newer. 
-  *For downloading the sqlcmd Utility and reviewing syntax, check out https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility?view=sql-server-ver15
+* No sqlcmd Utility? You're likely running SQL Server 2016 or newer. 
+  * For downloading the sqlcmd Utility and reviewing syntax, check out https://docs.microsoft.com/en-us/sql/tools/sqlcmd-utility?view=sql-server-ver15
 		
-*Getting Access Denied error when running script? You may just need to add full permissions for the MSSQLEXRESS user
-  *Open SQL Server Configuration Manager
-  *Select SQL Server Services in left-hand pane
-  *Right-click SQL Server (SQLEXPRESS)
-  *On Log On tab highlight and copy the entire Account Name (likely something like NT Service\MSSQL$SQLEXPRESS)
-  *Within File Explorer navigate to the backup destination and open its folder properties
-  *On the Security tab click Edit to change permissions
-  *For Groups or user names select Add
-  *For Object Types ensure all are selected
-  *For Locations change to ensure the local machine, and not your domain, is selected
-  *Paste your Account Name and Check Name it
-  *Click OK
-  *Back on the Security tab ensure your SQL account name (again, likely shown simply as MSSQL$SQLEXPRESS) has full permissions, and press Apply
-  *If you are unable to manage any of the above yourself, it is recommened you seek out your local database/systems/IT administrator
+* Getting Access Denied error when running script? You may just need to add full permissions for the MSSQLEXRESS user
+  * Open SQL Server Configuration Manager
+  * Select SQL Server Services in left-hand pane
+  * Right-click SQL Server (SQLEXPRESS)
+  * On Log On tab highlight and copy the entire Account Name (likely something like NT Service\MSSQL$SQLEXPRESS)
+  * Within File Explorer navigate to the backup destination and open its folder properties
+  * On the Security tab click Edit to change permissions
+  * For Groups or user names select Add
+  * For Object Types ensure all are selected
+  * For Locations change to ensure the local machine, and not your domain, is selected
+  * Paste your Account Name and Check Name it
+  * Click OK
+  * Back on the Security tab ensure your SQL account name (again, likely shown simply as MSSQL$SQLEXPRESS) has full permissions, and press Apply
+  * If you are unable to manage any of the above yourself, it is recommened you seek out your local database/systems/IT administrator
 		
 ## License
 
