@@ -3,10 +3,10 @@
 
 #### Table of Contents
 
-1. [About](#about)
-2. [Getting Started](#getting-started)
-3. [Troubleshooting](#troubleshooting)
-4. [License](#license)
+[About](#about)  
+[Getting Started](#getting-started)  
+[Troubleshooting](#troubleshooting)  
+[License](#license)  
 
 ## About
 
