@@ -42,12 +42,18 @@ Once that is done we will need to create a batch file (.bat) that uses the sqlcm
 
 `
 :: NOTE! Ensure the path for IF NOT EXIST is what you want!    
+
 IF NOT EXIST "C:\SQLBackups\" md "C:\SQLBackups"    
+
 :: NOTE! Change the server and instance names below, removing square brackets!    
+
 :: This is likely in the syntax of ServerName\SQLEXPRESS    
+
 :: NOTE! Ensure the path below matches the path you specified for the IF NOT EXIST    
+
 sqlcmd -S [server_name]\[instance_name] -E -Q "EXEC sp_BackupDatabases @backupLocation='C:\SQLBackups\', @backupType='F'"    
-:: NOTE! The path for @backupLocation= must close with a backslash \ before the closing single quote, otherwise it will try to write the backups to next lower directory    
+
+:: NOTE! The path for @backupLocation= must close with a backslash \ before the closing single quote, otherwise it will try to write the backups to next lower directory
 `	
 	
 After we have the .bat file it is recommended that we test it. Pending success, we can now use Task Scheduler (or your preferred scheduling medium) to schedule the .bat file to run at the frequency of your choosing. This will allow us to create and maintain backups of your SQL Server Express databases on a recurring basis.
